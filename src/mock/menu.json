@@ -1,0 +1,42 @@
+[
+    {
+        "path": "/home",
+        "name": "home",
+        "label": "首页",
+        "icon": "s-home",
+        "url":"Home/index.vue"
+    },
+    {
+        "path": "/mall",
+        "name": "mall",
+        "label": "商品管理",
+        "icon": "s-management",
+        "url":"Mall/index.vue"
+    },
+    {
+        "path": "/user",
+        "name": "user",
+        "label": "用户管理",
+        "icon": "user-solid",
+        "url":"User/index.vue"
+    },
+    {
+        "path": "/other",
+        "label": "其他",
+        "icon": "s-cooperation",
+        "children": [
+            {
+                "path": "/other/page1",
+                "name": "page1",
+                "label": "页面1",
+                "url":"Other/Page1.vue"
+            },
+            {
+                "path": "/other/page2",
+                "name": "page2",
+                "label": "页面2",
+                "url":"Other/Page2.vue"
+            }
+        ]
+    }
+]

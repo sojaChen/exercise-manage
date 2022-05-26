@@ -1,0 +1,7 @@
+[
+  {
+    "date": "@date",
+    "name": "@cname(2,3)",
+    "address": "@county(true)"
+  }
+]
