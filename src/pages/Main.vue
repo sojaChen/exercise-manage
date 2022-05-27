@@ -30,7 +30,7 @@ export default {
     return {};
   },
   mounted() {
-    if (this.$store.state.user.userInfo.name) {
+    if (Object.keys(this.$store.state.user.userInfo).length !== 0) {
       this.$router.replace({ path: "/home" });
     }
   },
