@@ -23,12 +23,12 @@ export default {
   },
   methods: {
     deleteBreadcrumb(item) {
-      this.deleteBreadcrumbList(item);
       if (item.path === this.$route.path) {
         this.$router.push({
-          path: this.breadcrumbList[this.breadcrumbList.length - 1].path,
+          path: this.breadcrumbList[this.breadcrumbList.indexOf(item) - 1].path,
         });
       }
+      this.deleteBreadcrumbList(item);
     },
     toPage(item) {
       this.$router.push({

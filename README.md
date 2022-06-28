@@ -1,27 +1,12 @@
-# vue_manage
+# 个人练习后台管理项目
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### 个人练习后台管理项目
+## 测试用账号
 ```
 用户名：admin
 密码：admin
+```
+
+```
+用户名：123
+密码：123
 ```

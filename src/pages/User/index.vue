@@ -1,5 +1,6 @@
 <template>
-  <div class="user">
+  <div>
+    <!-- 新增按钮与搜索栏 -->
     <el-form class="manage-header" :inline="true">
       <el-form-item>
         <el-button
@@ -9,61 +10,6 @@
           icon="el-icon-plus"
           >新增</el-button
         >
-        <el-dialog
-          title="新增用户"
-          :visible.sync="addDialogVisible"
-          width="35%"
-          :before-close="handleClose"
-        >
-          <el-form style="margin-left: 20px" :rules="rules" :model="newPerson">
-            <el-row :gutter="20">
-              <el-col style="margin-bottom: 25px" :span="12">
-                <el-form-item prop="name" label="姓名">
-                  <el-input
-                    style="width: 150px"
-                    v-model="newPerson.name"
-                  ></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col style="margin-bottom: 25px" :span="12">
-                <el-form-item prop="age" label="年龄">
-                  <el-input
-                    style="width: 150px"
-                    v-model="newPerson.age"
-                  ></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col style="margin-bottom: 25px" :span="12"
-                ><el-form-item prop="sex" label="性别">
-                  <el-select style="width: 150px" v-model="newPerson.sex">
-                    <el-option label="男" value="男"></el-option>
-                    <el-option label="女" value="女"></el-option>
-                  </el-select> </el-form-item
-              ></el-col>
-              <el-col style="margin-bottom: 25px" :span="12">
-                <el-form-item prop="birthday" label="出生日期">
-                  <el-date-picker
-                    style="width: 150px"
-                    v-model="newPerson.birthday"
-                    type="date"
-                    value-format="yyyy-MM-dd"
-                  ></el-date-picker>
-                </el-form-item>
-              </el-col>
-              <el-col style="margin-bottom: 25px" :span="24">
-                <el-form-item prop="address" label="住址">
-                  <el-input
-                    style="width: 400px"
-                    v-model="newPerson.address"
-                  ></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-          </el-form>
-          <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="addPersonData()">新增</el-button>
-          </span>
-        </el-dialog>
       </el-form-item>
       <div class="search">
         <el-form-item label-width="50px">
@@ -90,6 +36,57 @@
         </el-form-item>
       </div>
     </el-form>
+    <!-- 新增窗口 -->
+    <el-dialog
+      title="新增用户"
+      :visible.sync="addDialogVisible"
+      width="35%"
+      :before-close="handleClose"
+    >
+      <el-form :rules="rules" :model="newPerson">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item prop="name" label="姓名">
+              <el-input style="width: 100%" v-model="newPerson.name"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item prop="age" label="年龄">
+              <el-input style="width: 100%" v-model="newPerson.age"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12"
+            ><el-form-item prop="sex" label="性别">
+              <el-select style="width: 100%" v-model="newPerson.sex">
+                <el-option label="男" value="男"></el-option>
+                <el-option label="女" value="女"></el-option>
+              </el-select> </el-form-item
+          ></el-col>
+          <el-col :span="12">
+            <el-form-item prop="birthday" label="出生日期">
+              <el-date-picker
+                style="width: 100%"
+                v-model="newPerson.birthday"
+                type="date"
+                value-format="yyyy-MM-dd"
+              ></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item prop="address" label="住址">
+              <el-input
+                style="width: 100%"
+                v-model="newPerson.address"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="addPersonData()">新增</el-button>
+      </span>
+    </el-dialog>
+    <!-- 数据表格 -->
     <el-table :data="showPersonDataList" border style="width: 100%">
       <el-table-column align="center" prop="name" label="姓名">
       </el-table-column>
@@ -118,37 +115,30 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 编辑窗口 -->
     <el-dialog
       title="编辑用户"
       :visible.sync="editDialogVisible"
       width="35%"
       :before-close="handleClose"
     >
-      <el-form
-        style="margin-left: 20px"
-        :rules="rules"
-        :model="editPerson"
-        label-width="auto"
-      >
+      <el-form :rules="rules" :model="editPerson">
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item prop="name" label="姓名">
               <el-input
-                style="width: 150px"
+                style="width: 100%"
                 v-model="editPerson.name"
               ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item prop="age" label="年龄">
-              <el-input
-                style="width: 150px"
-                v-model="editPerson.age"
-              ></el-input>
+              <el-input style="width: 100%" v-model="editPerson.age"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item style="width: 200px" prop="sex" label="性别">
+            <el-form-item style="width: 100%" prop="sex" label="性别">
               <el-select v-model="editPerson.sex">
                 <el-option label="男" value="男"></el-option>
                 <el-option label="女" value="女"></el-option>
@@ -158,7 +148,7 @@
           <el-col :span="12">
             <el-form-item prop="birthday" label="出生日期">
               <el-date-picker
-                style="width: 150px"
+                style="width: 100%"
                 v-model="editPerson.birthday"
                 type="date"
                 value-format="yyyy-MM-dd"
@@ -168,7 +158,7 @@
           <el-col :span="24">
             <el-form-item prop="address" label="住址">
               <el-input
-                style="width: 400px"
+                style="width: 100%"
                 v-model="editPerson.address"
               ></el-input>
             </el-form-item>
@@ -179,9 +169,10 @@
         <el-button type="primary" @click="editPersonData">保存修改</el-button>
       </span>
     </el-dialog>
+    <!-- 分页器 -->
     <el-pagination
       @current-change="currentPageChange"
-      style="position: absolute; right: 20px; bottom: 50px"
+      style="float: right;"
       background
       layout="prev, pager, next"
       :current-page="currentPage"
@@ -223,13 +214,13 @@ export default {
         id: "",
       },
       rules: {
-        name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
-        age: [{ required: true, message: "请输入年龄", trigger: "blur" }],
-        sex: [{ required: true, message: "请选择性别", trigger: "blur" }],
+        name: [{ required: true, message: "请输入姓名", trigger: "change" }],
+        age: [{ required: true, message: "请输入年龄", trigger: "change" }],
+        sex: [{ required: true, message: "请选择性别", trigger: "change" }],
         birthday: [
-          { required: true, message: "请选择出生日期", trigger: "blur" },
+          { required: true, message: "请选择出生日期", trigger: "change" },
         ],
-        address: [{ required: true, message: "请输入住址", trigger: "blur" }],
+        address: [{ required: true, message: "请输入住址", trigger: "change" }],
       },
     };
   },
@@ -273,7 +264,7 @@ export default {
     },
     handleEdit(_, item) {
       this.editDialogVisible = true;
-      // 深拷贝
+      // 浅层次深拷贝
       this.editPerson = { ...item };
     },
     handleDelete(_, currentItem) {
@@ -316,7 +307,6 @@ export default {
     addPersonData() {
       let personList = [];
       const { keyArr, isFull } = this.isFull(this.newPerson);
-      console.log(isFull);
       if (isFull) {
         this.addDialogVisible = false;
         localStorage.getItem("personDataList") &&
@@ -367,8 +357,8 @@ export default {
             type: "success",
           });
           this.editDialogVisible = false;
-        }else{
-          Message.warning('内容不能为空')
+        } else {
+          Message.warning("内容不能为空");
         }
       }
     },
@@ -398,7 +388,7 @@ export default {
       this.searchText = "";
     },
   },
-  mounted() {
+  created() {
     sessionStorage.getItem("currentPage") &&
       (this.currentPage = JSON.parse(sessionStorage.getItem("currentPage")));
     localStorage.getItem("personDataList") &&
@@ -423,5 +413,8 @@ export default {
 /deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #fab;
   color: #fff;
+}
+/deep/.el-pagination {
+  padding: 20px 0;
 }
 </style>

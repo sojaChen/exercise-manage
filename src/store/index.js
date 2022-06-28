@@ -17,7 +17,7 @@ export default new Vuex.Store({
     plugins:[
         createPersistedState({
             storage:window.sessionStorage,
-            paths:['tab','user']
+            paths:['tab.isCollapse','tab.menuList','tab.breadcrumbList','user.userInfo']
         })
     ]
 })

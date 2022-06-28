@@ -4,7 +4,7 @@
       <!-- 用户信息卡片 -->
       <el-card class="user-card" shadow="always">
         <div slot="header" class="clearfix user-header">
-          <img class="user-img" :src="userImg" height="100px" />
+          <el-image class="user-img" :src="userInfo.imgUrl" fit="fill" lazy style="width:100px;height=100px;" key="userImg" />
           <div class="user-info">
             <span class="user-name">{{ userInfo.name }}</span>
             <span class="user-rank">{{ userInfo.rank }}</span>
@@ -25,7 +25,6 @@
           :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }"
           :data="leftTableData"
-          style="width: 100%"
         >
           <el-table-column prop="date" label="日期" width="170">
           </el-table-column>
@@ -66,14 +65,13 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "@/api";
 import * as echarts from "echarts";
-import { mapState,mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 export default {
   name: "Home",
   data() {
     return {
-      userImg: require("@/assets/userImg.jpg"),
       leftTableData: [],
       orderData: [],
       graphData: [],
@@ -85,7 +83,7 @@ export default {
   methods: {
     getLeftTableData() {
       axios
-        .get("/mock/leftTable")
+        .get("/leftTable")
         .then((res) => {
           this.leftTableData = res.data.data;
         })
@@ -95,7 +93,7 @@ export default {
     },
     getOrderData() {
       axios({
-        url: "/mock/order",
+        url: "/order",
         method: "get",
       })
         .then((res) => {
@@ -108,7 +106,7 @@ export default {
     },
     getGraphData() {
       axios
-        .get("/mock/graph")
+        .get("/graph")
         .then((res) => {
           this.graphData = res.data.data;
           this.setLineGraph();
@@ -184,7 +182,7 @@ export default {
       E.setOption(option);
     },
   },
-  mounted() {
+  created() {
     this.getLeftTableData();
     this.getOrderData();
     this.getGraphData();

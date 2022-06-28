@@ -6,19 +6,13 @@
         icon="el-icon-menu"
         @click="isCollapseChange"
       ></el-button>
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.name"
-          >{{item.label}}</el-breadcrumb-item
-        >
-      </el-breadcrumb>
     </div>
     <div class="r-content">
-      <el-dropdown trigger="click" size="mini">
+      <el-dropdown trigger="click" size="small">
         <span class="el-dropdown-link">
-          <img class="userImg" height="40px" :src="userImg" />
+          <el-image class="user-img" :src="userInfo.imgUrl" fit="fill" lazy style="width:40px;height=40px;" key="userImg" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -28,23 +22,24 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
+import Cookies from "js-cookie";
+import { Message } from "element-ui";
 export default {
   name: "Header",
-  data() {
-    return {
-      userImg: require("@/assets/userImg.jpg"),
-    };
-  },
   computed: {
     ...mapState("tab", ["breadcrumbList"]),
+    ...mapState("user", ["userInfo"]),
   },
   methods: {
-    logout(){
-      this.$router.replace('/login');
+    logout() {
+      Cookies.remove("token");
+      this.$router.replace("/login");
+      Message.warning("退出登录");
+      this.resetTab();
       this.removeUserInfo();
     },
-    ...mapMutations("tab", ["isCollapseChange"]),
-    ...mapMutations("user",["removeUserInfo"])
+    ...mapMutations("tab", ["isCollapseChange", "resetTab"]),
+    ...mapMutations("user", ["removeUserInfo"]),
   },
 };
 </script>
@@ -73,7 +68,7 @@ export default {
   }
 }
 .r-content {
-  .userImg {
+  .user-img {
     border-radius: 50%;
   }
 }

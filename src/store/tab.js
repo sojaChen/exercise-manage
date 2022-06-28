@@ -3,13 +3,20 @@ export default {
     namespaced: true,
     state: {
         isCollapse: false,
+        isAddRoutes: false,
         menuList: [],
         breadcrumbList: []
     },
     mutations: {
         setMenuList(state, val) {
+            if (val) {
+                state.menuList = val;
+                if (state.breadcrumbList.length === 0) state.breadcrumbList.push(state.menuList[0]);
+            }
+        },
+        setRoutes(state) {
             // 动态添加路由
-            if(val)state.menuList = val;
+            state.isAddRoutes = true;
             state.menuList.forEach((element) => {
                 if (element.children) {
                     element.children.forEach((childElement) => {
@@ -41,5 +48,10 @@ export default {
             const index = state.breadcrumbList.indexOf(value)
             state.breadcrumbList.splice(index, 1)
         },
+        resetTab(state) {
+            state.isCollapse = false;
+            state.menuList = [];
+            state.breadcrumbList = [];
+        }
     }
 }

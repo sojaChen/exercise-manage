@@ -13,10 +13,6 @@
     <h3 class="logo">
       {{ isCollapse ? "后台" : "后台管理系统" }}
     </h3>
-    <!-- <el-menu-item class="logo" index="/" @click="toPage('/')">
-      <i v-show="isCollapse" class="el-icon-s-platform"></i>
-      <span>后台管理系统</span>
-    </el-menu-item> -->
     <el-menu-item
       v-for="item in noChildren"
       :key="item.path"
@@ -43,7 +39,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapMutations, mapState } from "vuex";
 export default {
   name: "Aside",
@@ -64,7 +59,7 @@ export default {
         path: menuItem.path,
       });
     },
-    ...mapMutations("tab", ["updateBreadcrumbList", "setMenuList"]),
+    ...mapMutations("tab", ["updateBreadcrumbList"]),
   },
   computed: {
     // 没有子数据的菜单数据
@@ -78,15 +73,6 @@ export default {
     // 控制是否展开侧边栏
     ...mapState("tab", ["isCollapse", "menuList"]),
   },
-  mounted() {
-    // 获取菜单数据
-    axios.get("/mock/menu").then((response) => {
-      this.setMenuList(response.data.data);
-    });
-  },
-  updated(){
-    this.updateBreadcrumbList(this.menuList[0]);
-  }
 };
 </script>
 
@@ -114,4 +100,5 @@ a {
   line-height: 56px;
   text-align: center;
 }
+
 </style>

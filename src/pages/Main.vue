@@ -13,7 +13,9 @@
       <el-main>
         <!-- 面包屑 -->
         <Breadcrumb></Breadcrumb>
-        <router-view></router-view>
+        <transition appear name="route-change">
+          <router-view></router-view>
+        </transition>
       </el-main>
     </el-container>
   </el-container>
@@ -26,19 +28,21 @@ import Breadcrumb from "@/components/Breadcrumb";
 export default {
   name: "Main",
   components: { Aside, Header, Breadcrumb },
-  data() {
-    return {};
-  },
-  mounted() {
-    if (Object.keys(this.$store.state.user.userInfo).length !== 0) {
-      this.$router.replace({ path: "/home" });
-    }
-  },
 };
 </script>
 
 <style lang="less" scoped>
 .el-header {
   background-color: #333;
+}
+
+.route-change-enter-active {
+  transition: all .5s;
+}
+
+.route-change-enter,
+.route-change-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
 }
 </style>
