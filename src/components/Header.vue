@@ -9,9 +9,11 @@
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="small">
-        <span class="el-dropdown-link">
-          <el-image class="user-img" :src="userInfo.imgUrl" fit="fill" lazy style="width:40px;height=40px;" key="userImg" />
-        </span>
+        <div class="el-dropdown-link">
+          <div class="user-img">
+            <el-image class="user-img" :src="userInfo.imgUrl" fit="fill" :lazy="true" key="userImg" />
+          </div>
+        </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
@@ -69,6 +71,8 @@ export default {
 }
 .r-content {
   .user-img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
 }

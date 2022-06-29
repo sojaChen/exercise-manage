@@ -4,7 +4,15 @@
       <!-- 用户信息卡片 -->
       <el-card class="user-card" shadow="always">
         <div slot="header" class="clearfix user-header">
-          <el-image class="user-img" :src="userInfo.imgUrl" fit="fill" lazy style="width:100px;height=100px;" key="userImg" />
+          <div class="user-img">
+            <el-image
+              class="user-img"
+              :src="userInfo.imgUrl"
+              :lazy="true"
+              fit="cover"
+              key="userImg"
+            />
+          </div>
           <div class="user-info">
             <span class="user-name">{{ userInfo.name }}</span>
             <span class="user-rank">{{ userInfo.rank }}</span>
@@ -67,7 +75,7 @@
 <script>
 import axios from "@/api";
 import * as echarts from "echarts";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "Home",
   data() {
@@ -77,8 +85,8 @@ export default {
       graphData: [],
     };
   },
-  computed:{
-    ...mapState('user',['userInfo'])
+  computed: {
+    ...mapState("user", ["userInfo"]),
   },
   methods: {
     getLeftTableData() {
@@ -205,15 +213,18 @@ export default {
 }
 
 .user-header {
+  height: 120px;
   display: flex;
   align-items: center;
   .user-img {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   .user-info {
     display: flex;
     flex-direction: column;
-    margin-left: 40px;
+    margin-left: 50px;
     .user-name {
       font-size: 20px;
       margin-bottom: 8px;
