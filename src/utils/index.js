@@ -6,7 +6,8 @@ function checkIsFull(obj) {
     const keyArr = Object.keys(obj).filter((key) => key !== "id");
     try {
         keyArr.forEach((key) => {
-            if (!obj[key] || obj[key].trim() === "") {
+            console.log();
+            if (!obj[key] || /^[\s]*$/.test(obj[key])) {
                 isFull = false;
                 throw new Error('LoopInterrupt');
             }

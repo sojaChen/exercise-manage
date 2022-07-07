@@ -13,7 +13,7 @@ VueRouter.prototype.replace = function replace(location) {
 }
 
 const router = new VueRouter({
-    mode:'history',
+    mode:'hash',
     routes:[
         {
             path:'/',

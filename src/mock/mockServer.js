@@ -134,6 +134,8 @@ Mock.mock("/mock/editGoodsList", "post", (options) => {
 Mock.mock("/mock/searchGoodsList", "post", (options) => {
     const keyArr = Object.keys(data.goodsData[0]);
     const dataArr = []
+    // const reg = new RegExp(`.*${options.body}.*`);
+    // console.log(reg.test(data.goodsData[i][keyArr[j]]));
     for (let i = 0; i < data.goodsData.length; i++) {
         for (let j = 0; j < keyArr.length; j++) {
             if (data.goodsData[i][keyArr[j]] == options.body) {

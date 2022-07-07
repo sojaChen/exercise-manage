@@ -11,8 +11,8 @@ export default {
 </script>
 
 <style lang="less">
-/deep/ * {
-  font-family: Helvetica, Arial, sans-serif;
+*{
+  font-family: Helvetica, Arial, sans-serif !important;
 }
 #app {
   height: 100vh;
