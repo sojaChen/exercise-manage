@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 新增按钮与搜索栏 -->
-    <el-form class="manage-header" :inline="true">
+    <el-form class="manage-header" @submit.native.prevent :inline="true">
       <el-form-item>
         <el-button
           type="danger"
